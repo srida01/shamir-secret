@@ -10,10 +10,10 @@
 :root{
   --bg:#0a0c0f;--surface:#111418;--border:#1e2530;--accent:#00ff9d;
   --accent2:#0af;--warn:#ff6b35;--muted:#4a5568;--text:#c8d6e5;
-  --text-dim:#6b7a8d;--font:'JetBrains Mono',monospace;
+  --text-dim:#6b7a8d;--font:'JetBrains Mono',monospace;height:100%;width: 100%;
 }
-html,body{height:100%;background:#060810;display:flex;align-items:center;justify-content:center;padding:20px}
-.terminal{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;width:100%;max-width:740px;box-shadow:0 0 60px rgba(0,255,157,.05)}
+html,body{height:100%;width:100%;background:#060810;display:flex;align-items:center;justify-content:center;padding:20px}
+.terminal{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;height:75%;max-height:740px;width:75%;box-shadow:0 0 60px rgba(0,255,157,.05)}
 .titlebar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:8px}
 .dot{width:12px;height:12px;border-radius:50%}
 .d-red{background:#ff5f57}.d-yellow{background:#ffbd2e}.d-green{background:#28ca41}
@@ -29,7 +29,7 @@ html,body{height:100%;background:#060810;display:flex;align-items:center;justify
 .field{display:flex;flex-direction:column;gap:4px}
 .label{color:var(--text-dim);font-size:10px;letter-spacing:1.5px;font-family:var(--font)}
 .input-row{display:flex;align-items:center;gap:6px}
-.cli-prefix{color:var(--accent2);white-space:nowrap;font-size:11px;font-family:var(--font)}
+.cli-prefix{color:var(--accent2);white-space:normal;font-size:11px;font-family:var(--font)}
 input[type=text],input[type=number]{
   background:#060810;border:1px solid var(--border);color:var(--text);
   font-family:var(--font);font-size:12px;padding:7px 10px;
@@ -52,7 +52,7 @@ input[type=number]{width:72px}
 .share-check:checked{background:var(--accent2);border-color:var(--accent2)}
 .share-check:checked::after{content:'✓';position:absolute;color:#000;font-size:9px;top:-1px;left:2px}
 .share-idx{color:var(--accent2);min-width:28px;font-size:10px;font-family:var(--font)}
-.share-val{color:var(--text);font-size:10px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.5px;font-family:var(--font)}
+.share-val{color:var(--text);font-size:10px;flex:1;word-break: break-all;white-space:normal;letter-spacing:.5px;font-family:var(--font)}
 .count-badge{background:#1a2535;border:1px solid var(--accent2);color:var(--accent2);font-size:9px;padding:2px 7px;border-radius:10px;letter-spacing:1px;font-family:var(--font)}
 </style>
 </head>
@@ -167,7 +167,7 @@ input[type=number]{width:72px}
       logLine(out, 'ok', '✓ split complete');
       logLine(out, 'dim', '');
       shares.forEach((s, i) => {
-        logLine(out, 'ok', 'share[' + (i + 1) + ']  x=' + s.x + '  y=' + s.y.toString().slice(0, 32) + '...');
+        logLine(out, 'ok', 'share[' + (i + 1) + ']  x=' + s.x + '  y=' + s.y.toString());
       });
       logLine(out, 'dim', '');
       logLine(out, 'info', '→ any ' + k + ' of ' + n + ' shares can reconstruct the secret');
@@ -196,7 +196,7 @@ input[type=number]{width:72px}
 
       const val = document.createElement('span');
       val.className = 'share-val';
-      val.textContent = s.x + ':' + s.y.toString().slice(0, 48) + '...';
+      val.textContent = s.x + ':' + s.y.toString();
 
       row.appendChild(cb);
       row.appendChild(idx);
