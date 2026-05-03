@@ -10,64 +10,124 @@
 :root{
   --bg:#0a0c0f;--surface:#111418;--border:#1e2530;--accent:#00ff9d;
   --accent2:#0af;--warn:#ff6b35;--muted:#4a5568;--text:#c8d6e5;
-  --text-dim:#6b7a8d;--font:'JetBrains Mono',monospace;height:100%;width: 100%;
+  --text-dim:#6b7a8d;--font:'JetBrains Mono',monospace;
+  height:100%;width:100%;
 }
-html,body{height:100%;width:100%;background:#060810;display:flex;align-items:center;justify-content:center;padding:20px}
-.terminal{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;height:75%;max-height:740px;width:75%;box-shadow:0 0 60px rgba(0,255,157,.05)}
+html,body{height:100%;width: 100%;background:#060810;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px}
+
+/* ── Terminal ── */
+.terminal{background:var(--bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;height:100%;width:75%;box-shadow:0 0 60px rgba(0,255,157,.06)}
 .titlebar{background:var(--surface);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:8px}
 .dot{width:12px;height:12px;border-radius:50%}
 .d-red{background:#ff5f57}.d-yellow{background:#ffbd2e}.d-green{background:#28ca41}
-.title{flex:1;text-align:center;color:var(--text-dim);font-family:var(--font);font-size:11px;letter-spacing:2px}
+.wt{flex:1;text-align:center;color:var(--text-dim);font-family:var(--font);font-size:11px;letter-spacing:2px}
 .body{padding:20px;display:flex;flex-direction:column;gap:16px;font-family:var(--font)}
-.line{display:flex;align-items:center;gap:8px;color:var(--text-dim);font-size:11px}
-.sym{color:var(--accent)}
+.prompt-line{display:flex;align-items:center;gap:8px;color:var(--text-dim);font-size:11px}
+.prompt-sym{color:var(--accent)}
+
+/* ── Tabs ── */
 .tab-row{display:flex;gap:4px}
 .tab{padding:6px 14px;border:1px solid var(--border);border-radius:4px 4px 0 0;cursor:pointer;color:var(--text-dim);font-family:var(--font);font-size:11px;background:transparent;letter-spacing:1px;transition:all .15s}
 .tab.active{color:var(--accent);border-color:var(--accent);border-bottom-color:var(--bg)}
 .tab:hover:not(.active){color:var(--text);border-color:var(--muted)}
 .panel{border:1px solid var(--border);border-radius:0 4px 4px 4px;padding:16px;display:flex;flex-direction:column;gap:12px}
+
+/* ── Inputs ── */
 .field{display:flex;flex-direction:column;gap:4px}
-.label{color:var(--text-dim);font-size:10px;letter-spacing:1.5px;font-family:var(--font)}
+.lbl{color:var(--text-dim);font-size:10px;letter-spacing:1.5px}
 .input-row{display:flex;align-items:center;gap:6px}
-.cli-prefix{color:var(--accent2);white-space:normal;font-size:11px;font-family:var(--font)}
-input[type=text],input[type=number]{
-  background:#060810;border:1px solid var(--border);color:var(--text);
-  font-family:var(--font);font-size:12px;padding:7px 10px;
-  border-radius:4px;outline:none;transition:border .15s;
-}
+.cli-pfx{color:var(--accent2);white-space:nowrap;font-size:11px}
+input[type=text],input[type=number]{background:#060810;border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:12px;padding:7px 10px;border-radius:4px;outline:none;transition:border .15s}
 input[type=text]:focus,input[type=number]:focus{border-color:var(--accent2)}
 input[type=number]{width:72px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.btn{
-  background:transparent;border:1px solid var(--accent);color:var(--accent);
-  font-family:var(--font);font-size:11px;padding:8px 18px;border-radius:4px;
-  cursor:pointer;letter-spacing:1px;transition:all .15s;align-self:flex-start;
-}
+
+/* ── Buttons ── */
+.btn-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{background:transparent;border:1px solid var(--accent);color:var(--accent);font-family:var(--font);font-size:11px;padding:8px 18px;border-radius:4px;cursor:pointer;letter-spacing:1px;transition:all .15s}
 .btn:hover{background:var(--accent);color:#000}
-.output-block{background:#060810;border:1px solid var(--border);border-radius:4px;padding:12px;font-size:11px;line-height:1.8;font-family:var(--font)}
+.btn-walk{border-color:var(--accent2);color:var(--accent2)}
+.btn-walk:hover{background:var(--accent2);color:#000}
+.btn-walk:disabled{opacity:.3;cursor:not-allowed}
+.btn-walk:hover:disabled{background:transparent;color:var(--accent2)}
+
+/* ── Output ── */
+.output-block{background:#060810;border:1px solid var(--border);border-radius:4px;padding:12px;font-size:11px;line-height:1.8}
 .ok{color:var(--accent)}.info{color:var(--accent2)}.err{color:var(--warn)}.dim{color:var(--text-dim)}
+
+/* ── Share list ── */
 .share-item{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border)}
 .share-item:last-child{border-bottom:none}
 .share-check{appearance:none;-webkit-appearance:none;width:14px;height:14px;border:1px solid var(--muted);border-radius:2px;cursor:pointer;flex-shrink:0;position:relative}
 .share-check:checked{background:var(--accent2);border-color:var(--accent2)}
 .share-check:checked::after{content:'✓';position:absolute;color:#000;font-size:9px;top:-1px;left:2px}
-.share-idx{color:var(--accent2);min-width:28px;font-size:10px;font-family:var(--font)}
-.share-val{color:var(--text);font-size:10px;flex:1;word-break: break-all;white-space:normal;letter-spacing:.5px;font-family:var(--font)}
-.count-badge{background:#1a2535;border:1px solid var(--accent2);color:var(--accent2);font-size:9px;padding:2px 7px;border-radius:10px;letter-spacing:1px;font-family:var(--font)}
+.share-idx{color:var(--accent2);min-width:28px;font-size:10px}
+.share-val{color:var(--text);font-size:10px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;letter-spacing:.5px}
+.count-badge{background:#1a2535;border:1px solid var(--accent2);color:var(--accent2);font-size:9px;padding:2px 7px;border-radius:10px;letter-spacing:1px}
+
+/* ── Walkthrough overlay ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:100;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.walk-box{background:#0d1117;border:1px solid var(--border);border-radius:12px;width:100%;max-width:720px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+
+/* header */
+.walk-head{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px}
+.walk-title{flex:1;color:var(--text);font-family:var(--font);font-size:12px;letter-spacing:1px}
+.walk-close{background:transparent;border:1px solid var(--border);color:var(--text-dim);font-family:var(--font);font-size:11px;padding:4px 12px;border-radius:4px;cursor:pointer;transition:all .15s}
+.walk-close:hover{border-color:var(--warn);color:var(--warn)}
+
+/* progress bar */
+.walk-progress{height:2px;background:var(--border);position:relative}
+.walk-progress-fill{height:100%;background:var(--accent);transition:width .3s ease}
+
+/* step content */
+.walk-content{flex:1;overflow-y:auto;padding:24px 20px}
+.step-header{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.step-pill{font-size:9px;letter-spacing:2px;padding:3px 10px;border-radius:10px;border:1px solid;flex-shrink:0}
+.step-pill.accent2{color:var(--accent2);border-color:var(--accent2);background:rgba(0,170,255,.08)}
+.step-pill.accent{color:var(--accent);border-color:var(--accent);background:rgba(0,255,157,.08)}
+.step-pill.ok{color:var(--accent);border-color:var(--accent);background:rgba(0,255,157,.08)}
+.step-name{color:var(--text);font-size:13px;font-family:var(--font);font-weight:700}
+
+/* line types */
+.line-formula{background:#060e18;border-left:2px solid var(--accent2);padding:8px 12px;border-radius:0 4px 4px 0;margin:6px 0;color:var(--accent2);font-size:12px;letter-spacing:.5px}
+.line-sub{color:var(--text-dim);font-size:11px;margin:4px 0 8px;line-height:1.6}
+.line-data{display:grid;grid-template-columns:130px 1fr;gap:8px;padding:4px 0;border-bottom:1px solid #1a1f2a;align-items:baseline}
+.line-data:last-child{border-bottom:none}
+.line-data .key{color:var(--text-dim);font-size:10px;letter-spacing:1px}
+.line-data .val{color:var(--text);font-size:11px;word-break:break-all;line-height:1.6}
+.line-note{background:#0e1a14;border:1px solid #1a3025;border-radius:4px;padding:8px 12px;color:#4caf80;font-size:11px;margin-top:8px;line-height:1.6}
+
+/* nav */
+.walk-nav{border-top:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px}
+.walk-nav-info{flex:1;color:var(--text-dim);font-size:11px;letter-spacing:1px}
+.btn-nav{background:transparent;border:1px solid var(--border);color:var(--text);font-family:var(--font);font-size:11px;padding:7px 16px;border-radius:4px;cursor:pointer;transition:all .15s}
+.btn-nav:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+.btn-nav:disabled{opacity:.3;cursor:not-allowed}
+.btn-nav.primary{border-color:var(--accent);color:var(--accent)}
+.btn-nav.primary:hover:not(:disabled){background:var(--accent);color:#000}
+
+/* step dots */
+.step-dots{display:flex;gap:6px;margin-left:auto}
+.step-dot{width:8px;height:8px;border-radius:50%;border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .2s}
+.step-dot.done{background:var(--muted);border-color:var(--muted)}
+.step-dot.active{background:var(--accent);border-color:var(--accent)}
 </style>
 </head>
 <body>
 
+<!-- ── Terminal ─────────────────────────────────────────────────────────── -->
 <div class="terminal">
   <div class="titlebar">
     <div class="dot d-red"></div><div class="dot d-yellow"></div><div class="dot d-green"></div>
-    <div class="title">Shamir's Secret Sharing Scheme</div>
+    <div class="wt">shamir-secret — bash — 80×24</div>
   </div>
   <div class="body">
-    <div class="line">
-      <span class="sym">$</span>
+    <div class="prompt-line">
+      <span class="prompt-sym">$</span>
       <span style="color:var(--text-dim)">shamir-secret</span>
       <span style="color:#fff;margin-left:4px">v1.0.0</span>
+      <span class="dim" style="margin-left:auto">Shamir's Secret Sharing Scheme</span>
     </div>
 
     <div>
@@ -79,36 +139,39 @@ input[type=number]{width:72px}
       <!-- SPLIT PANEL -->
       <div class="panel" id="panel-split">
         <div class="field">
-          <div class="label">-- secret</div>
+          <div class="lbl">-- secret</div>
           <div class="input-row">
-            <span class="cli-prefix">--secret</span>
+            <span class="cli-pfx">--secret</span>
             <input type="text" id="secret" placeholder="enter your secret..." style="flex:1" />
           </div>
         </div>
         <div class="row2">
           <div class="field">
-            <div class="label">-- shares (n)</div>
+            <div class="lbl">-- shares (n)</div>
             <div class="input-row">
-              <span class="cli-prefix">-n</span>
+              <span class="cli-pfx">-n</span>
               <input type="number" id="n-shares" value="5" min="2" max="20" />
             </div>
           </div>
           <div class="field">
-            <div class="label">-- threshold (k)</div>
+            <div class="lbl">-- threshold (k)</div>
             <div class="input-row">
-              <span class="cli-prefix">-k</span>
+              <span class="cli-pfx">-k</span>
               <input type="number" id="k-threshold" value="3" min="2" max="20" />
             </div>
           </div>
         </div>
-        <button class="btn" onclick="doSplit()">&#9654; RUN SPLIT</button>
+        <div class="btn-row">
+          <button class="btn" onclick="doSplit()">&#9654; RUN SPLIT</button>
+          <button class="btn btn-walk" id="walk-split-btn" onclick="openWalkthrough('split')" disabled>&#10732; WALKTHROUGH</button>
+        </div>
         <div class="output-block" id="split-out" style="display:none"></div>
       </div>
 
       <!-- RECONSTRUCT PANEL -->
       <div class="panel" id="panel-reconstruct" style="display:none">
         <div class="field">
-          <div class="label" style="display:flex;align-items:center;gap:8px">
+          <div class="lbl" style="display:flex;align-items:center;gap:8px">
             -- select shares to use
             <span class="count-badge" id="sel-count">0 selected</span>
           </div>
@@ -116,14 +179,37 @@ input[type=number]{width:72px}
             <span class="dim" style="font-size:11px">no shares loaded — run SPLIT first</span>
           </div>
         </div>
-        <button class="btn" onclick="doReconstruct()">&#9654; RUN RECONSTRUCT</button>
+        <div class="btn-row">
+          <button class="btn" onclick="doReconstruct()">&#9654; RUN RECONSTRUCT</button>
+          <button class="btn btn-walk" id="walk-rec-btn" onclick="openWalkthrough('reconstruct')" disabled>&#10732; WALKTHROUGH</button>
+        </div>
         <div class="output-block" id="reconstruct-out" style="display:none"></div>
       </div>
     </div>
 
-    <div class="line" style="margin-top:4px">
-      <span class="sym">$</span>
+    <div class="prompt-line" style="margin-top:4px">
+      <span class="prompt-sym">$</span>
       <span style="color:var(--text-dim)">_</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── Walkthrough Overlay ──────────────────────────────────────────────── -->
+<div class="overlay" id="overlay" onclick="overlayClick(event)">
+  <div class="walk-box">
+    <div class="walk-head">
+      <div class="walk-title" id="walk-mode-title">SPLIT WALKTHROUGH</div>
+      <button class="walk-close" onclick="closeWalkthrough()">✕ CLOSE</button>
+    </div>
+    <div class="walk-progress">
+      <div class="walk-progress-fill" id="walk-progress-fill"></div>
+    </div>
+    <div class="walk-content" id="walk-content"></div>
+    <div class="walk-nav">
+      <div class="walk-nav-info" id="walk-nav-info">step 1 of 3</div>
+      <div class="step-dots" id="step-dots"></div>
+      <button class="btn-nav" id="btn-prev" onclick="prevStep()">&#8592; PREV</button>
+      <button class="btn-nav primary" id="btn-next" onclick="nextStep()">NEXT &#8594;</button>
     </div>
   </div>
 </div>
@@ -131,17 +217,22 @@ input[type=number]{width:72px}
 <script type="module">
   import { split, reconstruct } from './shamir.js';
 
-  // ── UI State ──────────────────────────────────────────────────────────────
+  // ── State ─────────────────────────────────────────────────────────────────
+  let currentShares   = [];
+  let splitSteps      = null;
+  let reconstructSteps = null;
+  let walkSteps       = [];
+  let walkIdx         = 0;
 
-  let currentShares = [];
-
+  // ── Tab switching ─────────────────────────────────────────────────────────
   window.switchTab = function(tab, el) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
-    document.getElementById('panel-split').style.display = tab === 'split' ? 'flex' : 'none';
+    document.getElementById('panel-split').style.display       = tab === 'split' ? 'flex' : 'none';
     document.getElementById('panel-reconstruct').style.display = tab === 'reconstruct' ? 'flex' : 'none';
   };
 
+  // ── Logging helper ────────────────────────────────────────────────────────
   function logLine(container, cls, text) {
     const d = document.createElement('div');
     d.className = cls;
@@ -149,6 +240,7 @@ input[type=number]{width:72px}
     container.appendChild(d);
   }
 
+  // ── SPLIT ─────────────────────────────────────────────────────────────────
   window.doSplit = function() {
     const secret = document.getElementById('secret').value.trim();
     const n = parseInt(document.getElementById('n-shares').value);
@@ -162,55 +254,26 @@ input[type=number]{width:72px}
 
     try {
       logLine(out, 'info', '→ generating ' + n + ' shares with threshold ' + k + '...');
-      const shares = split(secret, n, k);
-      currentShares = shares;
+      const result = split(secret, n, k);
+      currentShares = result.shares;
+      splitSteps    = result.steps;
+
       logLine(out, 'ok', '✓ split complete');
       logLine(out, 'dim', '');
-      shares.forEach((s, i) => {
-        logLine(out, 'ok', 'share[' + (i + 1) + ']  x=' + s.x + '  y=' + s.y.toString());
+      result.shares.forEach((s, i) => {
+        logLine(out, 'ok', 'share[' + (i + 1) + ']  x=' + s.x + '  y=' + s.y.toString() );
       });
       logLine(out, 'dim', '');
       logLine(out, 'info', '→ any ' + k + ' of ' + n + ' shares can reconstruct the secret');
-      renderShareList(shares);
+
+      document.getElementById('walk-split-btn').disabled = false;
+      renderShareList(result.shares);
     } catch (e) {
       logLine(out, 'err', '✗ error: ' + e.message);
     }
   };
 
-  function renderShareList(shares) {
-    const list = document.getElementById('share-list');
-    list.innerHTML = '';
-    shares.forEach((s, i) => {
-      const row = document.createElement('div');
-      row.className = 'share-item';
-
-      const cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.className = 'share-check';
-      cb.dataset.idx = i;
-      cb.addEventListener('change', updateSelCount);
-
-      const idx = document.createElement('span');
-      idx.className = 'share-idx';
-      idx.textContent = '[' + (i + 1) + ']';
-
-      const val = document.createElement('span');
-      val.className = 'share-val';
-      val.textContent = s.x + ':' + s.y.toString();
-
-      row.appendChild(cb);
-      row.appendChild(idx);
-      row.appendChild(val);
-      list.appendChild(row);
-    });
-    updateSelCount();
-  }
-
-  function updateSelCount() {
-    const n = document.querySelectorAll('.share-check:checked').length;
-    document.getElementById('sel-count').textContent = n + ' selected';
-  }
-
+  // ── RECONSTRUCT ───────────────────────────────────────────────────────────
   window.doReconstruct = function() {
     const out = document.getElementById('reconstruct-out');
     out.innerHTML = '';
@@ -218,14 +281,8 @@ input[type=number]{width:72px}
 
     const checked = [...document.querySelectorAll('.share-check:checked')];
 
-    if (currentShares.length === 0) {
-      logLine(out, 'err', '✗ error: no shares loaded — run SPLIT first');
-      return;
-    }
-    if (checked.length === 0) {
-      logLine(out, 'err', '✗ error: select at least one share');
-      return;
-    }
+    if (currentShares.length === 0) { logLine(out, 'err', '✗ error: no shares loaded — run SPLIT first'); return; }
+    if (checked.length === 0)       { logLine(out, 'err', '✗ error: select at least one share'); return; }
 
     const k = parseInt(document.getElementById('k-threshold').value);
     const idxList = checked.map(c => +c.dataset.idx + 1).join(',');
@@ -237,18 +294,170 @@ input[type=number]{width:72px}
 
     try {
       const result = reconstruct(selected);
+      reconstructSteps = result.steps;
       logLine(out, 'dim', '');
       if (selected.length < k) {
         logLine(out, 'err', '⚠ warning: below threshold (' + selected.length + ' < ' + k + ')');
-        logLine(out, 'err', '✗ result (likely wrong): ' + result);
+        logLine(out, 'err', '✗ result (likely wrong): ' + result.secret);
       } else {
         logLine(out, 'ok', '✓ reconstruction successful');
-        logLine(out, 'ok', '→ secret: ' + result);
+        logLine(out, 'ok', '→ secret: ' + result.secret);
       }
+      document.getElementById('walk-rec-btn').disabled = false;
     } catch (e) {
       logLine(out, 'err', '✗ error: ' + e.message);
     }
   };
+
+  // ── Share list ────────────────────────────────────────────────────────────
+  function renderShareList(shares) {
+    const list = document.getElementById('share-list');
+    list.innerHTML = '';
+    shares.forEach((s, i) => {
+      const row = document.createElement('div');
+      row.className = 'share-item';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.className = 'share-check'; cb.dataset.idx = i;
+      cb.addEventListener('change', updateSelCount);
+      const idx = document.createElement('span');
+      idx.className = 'share-idx'; idx.textContent = '[' + (i + 1) + ']';
+      const val = document.createElement('span');
+      val.className = 'share-val';
+      val.textContent = s.x + ':' + s.y.toString();
+      row.appendChild(cb); row.appendChild(idx); row.appendChild(val);
+      list.appendChild(row);
+    });
+    updateSelCount();
+  }
+
+  function updateSelCount() {
+    const n = document.querySelectorAll('.share-check:checked').length;
+    document.getElementById('sel-count').textContent = n + ' selected';
+  }
+
+  // ── Walkthrough ───────────────────────────────────────────────────────────
+  window.openWalkthrough = function(mode) {
+    walkSteps = mode === 'split' ? splitSteps : reconstructSteps;
+    if (!walkSteps) return;
+    walkIdx = 0;
+    document.getElementById('walk-mode-title').textContent =
+      mode === 'split' ? 'SPLIT — MATH WALKTHROUGH' : 'RECONSTRUCT — MATH WALKTHROUGH';
+    buildDots();
+    renderStep();
+    document.getElementById('overlay').classList.add('open');
+  };
+
+  window.closeWalkthrough = function() {
+    document.getElementById('overlay').classList.remove('open');
+  };
+
+  window.overlayClick = function(e) {
+    if (e.target === document.getElementById('overlay')) closeWalkthrough();
+  };
+
+  window.prevStep = function() {
+    if (walkIdx > 0) { walkIdx--; renderStep(); }
+  };
+
+  window.nextStep = function() {
+    if (walkIdx < walkSteps.length - 1) { walkIdx++; renderStep(); }
+  };
+
+  function buildDots() {
+    const dots = document.getElementById('step-dots');
+    dots.innerHTML = '';
+    walkSteps.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'step-dot';
+      d.onclick = () => { walkIdx = i; renderStep(); };
+      dots.appendChild(d);
+    });
+  }
+
+  function renderStep() {
+    const step = walkSteps[walkIdx];
+    const total = walkSteps.length;
+    const pct = ((walkIdx + 1) / total * 100).toFixed(1);
+
+    // progress
+    document.getElementById('walk-progress-fill').style.width = pct + '%';
+
+    // nav info
+    document.getElementById('walk-nav-info').textContent =
+      'step ' + (walkIdx + 1) + ' of ' + total;
+
+    // nav buttons
+    document.getElementById('btn-prev').disabled = walkIdx === 0;
+    document.getElementById('btn-next').disabled = walkIdx === total - 1;
+    document.getElementById('btn-next').textContent =
+      walkIdx === total - 1 ? '✓ DONE' : 'NEXT →';
+
+    // dots
+    document.querySelectorAll('.step-dot').forEach((d, i) => {
+      d.className = 'step-dot' + (i < walkIdx ? ' done' : i === walkIdx ? ' active' : '');
+    });
+
+    // content
+    const content = document.getElementById('walk-content');
+    content.innerHTML = '';
+
+    // step header
+    const hdr = document.createElement('div');
+    hdr.className = 'step-header';
+    const pill = document.createElement('div');
+    pill.className = 'step-pill ' + (step.color || 'accent');
+    pill.textContent = 'STEP ' + (walkIdx + 1);
+    const name = document.createElement('div');
+    name.className = 'step-name';
+    name.textContent = step.title;
+    hdr.appendChild(pill);
+    hdr.appendChild(name);
+    content.appendChild(hdr);
+
+    // lines
+    let dataGroup = null;
+    step.lines.forEach(line => {
+      if (line.type === 'formula') {
+        dataGroup = null;
+        const el = document.createElement('div');
+        el.className = 'line-formula';
+        el.textContent = line.text;
+        content.appendChild(el);
+      } else if (line.type === 'sub') {
+        dataGroup = null;
+        const el = document.createElement('div');
+        el.className = 'line-sub';
+        el.textContent = line.text;
+        content.appendChild(el);
+      } else if (line.type === 'note') {
+        dataGroup = null;
+        const el = document.createElement('div');
+        el.className = 'line-note';
+        el.textContent = line.text;
+        content.appendChild(el);
+      } else if (line.type === 'data') {
+        if (!dataGroup) {
+          dataGroup = document.createElement('div');
+          dataGroup.style.cssText = 'margin:8px 0;border:1px solid #1a1f2a;border-radius:4px;overflow:hidden';
+          content.appendChild(dataGroup);
+        }
+        const row = document.createElement('div');
+        row.className = 'line-data';
+        row.style.padding = '5px 10px';
+        const key = document.createElement('div');
+        key.className = 'key';
+        key.textContent = line.label;
+        const val = document.createElement('div');
+        val.className = 'val';
+        val.textContent = line.text;
+        row.appendChild(key);
+        row.appendChild(val);
+        dataGroup.appendChild(row);
+      }
+    });
+
+    content.scrollTop = 0;
+  }
 </script>
 </body>
 </html>
